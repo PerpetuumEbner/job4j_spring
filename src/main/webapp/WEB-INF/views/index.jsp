@@ -18,27 +18,17 @@
         <thead>
         <tr>
             <th scope="col">Id</th>
-            <th scope="col">Имя</th>
-        </tr>
-        </thead>
-        <c:forEach var="user" items="${users}">
-            <tr>
-                <td>${user.id}</td>
-                <td>${user.name}</td>
-            </tr>
-        </c:forEach>
-    </table>
-</div>
-<div class="container pt-3">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">Заявки</th>
+            <th scope="col">Нарушение</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Адрес</th>
         </tr>
         </thead>
         <c:forEach var="accident" items="${accidents}">
             <tr>
-                <td>${accident}</td>
+                <td>${accident.id}</td>
+                <td>${accident.name}</td>
+                <td>${accident.text}</td>
+                <td>${accident.address}</td>
             </tr>
         </c:forEach>
     </table>

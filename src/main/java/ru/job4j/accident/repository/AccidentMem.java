@@ -12,11 +12,22 @@ public class AccidentMem {
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
 
     private AccidentMem() {
-        accidents.put(1, new Accident());
-        accidents.put(2, new Accident());
-        accidents.put(3, new Accident());
-        accidents.put(4, new Accident());
-        accidents.put(5, new Accident());
+        accidents.put(1, new Accident(
+                1, "Отсутствие документов и регистрации автомобиля",
+                "Управление транспортным средством, не зарегистрированным в установленном порядке",
+                "Санкт-Петербург"));
+        accidents.put(2, new Accident(
+                2, "Техническое состояние транспортного средства",
+                "Управление транспортным средством с заведомо неисправными тормозной системой (за исключением стояночного тормоза), рулевым управлением или сцепным устройством (в составе поезда)",
+                "Екатеринбург"));
+        accidents.put(3, new Accident(
+                3, "Состояние опьянения и отсутствие права управления",
+                "Управление транспортным средством водителем, лишенным права управления транспортными средствами",
+                "Челябинск"));
+        accidents.put(4, new Accident(
+                4, "Скоростной режим",
+                "Превышение установленной скорости движения транспортного средства на величину более 20, но не более 40 километров в час",
+                "Казань"));
     }
 
     public Collection<Accident> findAll() {

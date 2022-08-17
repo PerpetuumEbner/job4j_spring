@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class UserMem {
-    Map<Integer, User> users = new ConcurrentHashMap<>();
+    private final Map<Integer, User> users = new ConcurrentHashMap<>();
 
     private UserMem() {
         users.put(1, new User(1, "Stanislav"));
