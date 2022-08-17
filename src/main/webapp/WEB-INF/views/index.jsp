@@ -17,12 +17,28 @@
     <table class="table table-hover">
         <thead>
         <tr>
+            <th scope="col">Id</th>
             <th scope="col">Имя</th>
         </tr>
         </thead>
         <c:forEach var="user" items="${users}">
             <tr>
-                <td>${user}</td>
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
+<div class="container pt-3">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Заявки</th>
+        </tr>
+        </thead>
+        <c:forEach var="accident" items="${accidents}">
+            <tr>
+                <td>${accident}</td>
             </tr>
         </c:forEach>
     </table>
