@@ -14,7 +14,19 @@ public class AccidentService {
         this.accidentMem = accidentMem;
     }
 
+    public void create(Accident accident) {
+        accidentMem.create(accident);
+    }
+
     public Collection<Accident> findAll() {
         return accidentMem.findAll();
+    }
+
+    public Accident findById(int id) {
+        return accidentMem.findById(id);
+    }
+
+    public void update(Accident accident) {
+        accidentMem.update(accident);
     }
 }
