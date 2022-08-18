@@ -26,7 +26,9 @@
         <c:forEach var="accident" items="${accidents}">
             <tr>
                 <td>${accident.id}</td>
-                <td>${accident.name}</td>
+                <td>
+                    <a href="<c:url value='/edit?id=${accident.id}'/>" class="global">${accident.name}</a>
+                </td>
                 <td>${accident.text}</td>
                 <td>${accident.address}</td>
             </tr>
