@@ -23,15 +23,24 @@
                 <input type="hidden" name="id" value="${accident.id}">
                 <div class="form-group">
                     <label for="name">Название</label>
-                    <input type="text" class="form-control" name="name" id="name" value="${accident.name}">
+                    <input type="text" class="form-control" name="name" value="${accident.name}">
                 </div>
                 <div class="form-group pt-3">
                     <label for="text">Описание</label>
-                    <textarea class="form-control" name="text" id="text">${accident.text}</textarea>
+                    <textarea class="form-control" name="text">${accident.text}</textarea>
+                </div>
+                <div class="form-group pt-3">
+                    <label for="type">Тип транспорта</label>
+                    <select class="form-select" id="typeId" name="typeId">
+                        <option selected>Выберите тип</option>
+                        <c:forEach var="type" items="${types}">
+                            <option value="${typeId}">${type.name}</option>
+                        </c:forEach>
+                    </select>
                 </div>
                 <div class="form-group pt-3">
                     <label for="address">Адрес</label>
-                    <input type="text" class="form-control" name="address" id="address" value="${accident.address}">
+                    <input type="text" class="form-control" name="address" value="${accident.address}">
                 </div>
                 <div class="form-group pt-3">
                     <button type="submit" class="btn btn-outline-primary ">Изменить</button>

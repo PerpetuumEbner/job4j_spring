@@ -20,6 +20,7 @@
             <th scope="col">Id</th>
             <th scope="col">Нарушение</th>
             <th scope="col">Описание</th>
+            <th scope="col">Тип транспорта</th>
             <th scope="col">Адрес</th>
         </tr>
         </thead>
@@ -30,6 +31,7 @@
                     <a href="<c:url value='/edit?id=${accident.id}'/>" class="global">${accident.name}</a>
                 </td>
                 <td>${accident.text}</td>
+                <td>${accident.type.name}</td>
                 <td>${accident.address}</td>
             </tr>
         </c:forEach>

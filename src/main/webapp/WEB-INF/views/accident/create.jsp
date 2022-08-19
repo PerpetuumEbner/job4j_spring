@@ -29,6 +29,15 @@
                     <textarea class="form-control" name="text" id="text"></textarea>
                 </div>
                 <div class="form-group pt-3">
+                    <label for="type">Тип транспорта</label>
+                    <select class="form-select" id="typeId" name="typeId">
+                        <option selected>Выберите тип</option>
+                        <c:forEach var="type" items="${types}">
+                            <option value="${typeId}">${type.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="form-group pt-3">
                     <label for="address">Адрес</label>
                     <input type="text" class="form-control" name="address" id="address">
                 </div>
