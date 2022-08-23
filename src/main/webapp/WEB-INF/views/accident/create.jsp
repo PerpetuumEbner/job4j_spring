@@ -29,11 +29,11 @@
                     <textarea class="form-control" name="text" id="text"></textarea>
                 </div>
                 <div class="form-group pt-3">
-                    <label for="type">Тип транспорта</label>
+                    <label for="typeId">Тип транспорта</label>
                     <select class="form-select" id="typeId" name="typeId">
                         <option selected>Выберите тип</option>
                         <c:forEach var="type" items="${types}">
-                            <option value="${typeId}">${type.name}</option>
+                            <option value="${type.id}">${type.name}</option>
                         </c:forEach>
                     </select>
                 </div>

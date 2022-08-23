@@ -25,7 +25,7 @@ public class AccidentControl {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Accident accident, @RequestParam("id") int typeId) {
+    public String save(@ModelAttribute Accident accident, @RequestParam("typeId") int typeId) {
         accident.setType(types.findDyId(typeId));
         accidents.create(accident);
         return "redirect:/";
@@ -39,7 +39,7 @@ public class AccidentControl {
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute Accident accident, @RequestParam("id") int typeId) {
+    public String update(@ModelAttribute Accident accident, @RequestParam("typeId") int typeId) {
         accident.setType(types.findDyId(typeId));
         accidents.update(accident);
         return "redirect:/";
