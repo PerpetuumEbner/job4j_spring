@@ -19,7 +19,7 @@ public class AccidentTypeMem {
         types.put(5, new AccidentType(5, "Пешеход"));
     }
 
-    public AccidentType findDyId(int id) {
+    public AccidentType findById(int id) {
         return types.get(id);
     }
 

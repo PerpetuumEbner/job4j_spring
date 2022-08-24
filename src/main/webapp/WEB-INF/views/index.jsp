@@ -21,6 +21,7 @@
             <th scope="col">Нарушение</th>
             <th scope="col">Описание</th>
             <th scope="col">Тип транспорта</th>
+            <th scope="col">Статья</th>
             <th scope="col">Адрес</th>
         </tr>
         </thead>
@@ -32,6 +33,10 @@
                 </td>
                 <td>${accident.text}</td>
                 <td>${accident.type.name}</td>
+                <td>
+                    <c:forEach var="type" items="${accident.getRules()}">
+                        <option>${type.name}</option>
+                    </c:forEach></td>
                 <td>${accident.address}</td>
             </tr>
         </c:forEach>

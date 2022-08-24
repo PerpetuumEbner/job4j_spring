@@ -14,8 +14,8 @@ public class AccidentTypeService {
         this.accidentTypeMem = accidentTypeMem;
     }
 
-    public AccidentType findDyId(int id) {
-        return accidentTypeMem.findDyId(id);
+    public AccidentType findById(int id) {
+        return accidentTypeMem.findById(id);
     }
 
     public Collection<AccidentType> findAll() {

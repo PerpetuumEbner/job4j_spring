@@ -38,6 +38,14 @@
                         </c:forEach>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="rulesId">Статья</label>
+                    <select class="form-control" id="rulesId" name="rulesId" multiple="multiple" size="3">
+                        <c:forEach var="rule" items="${rules}">
+                            <option value="${rule.id}">${rule.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
                 <div class="form-group pt-3">
                     <label for="address">Адрес</label>
                     <input type="text" class="form-control" name="address" id="address" value="${accident.address}">
