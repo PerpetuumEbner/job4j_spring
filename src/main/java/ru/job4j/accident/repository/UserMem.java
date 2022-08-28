@@ -1,13 +1,11 @@
 package ru.job4j.accident.repository;
 
-import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.User;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Repository
 public class UserMem {
     private final Map<Integer, User> users = new ConcurrentHashMap<>();
 

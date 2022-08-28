@@ -1,13 +1,11 @@
 package ru.job4j.accident.repository;
 
-import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.AccidentType;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Repository
 public class AccidentTypeMem {
     private final Map<Integer, AccidentType> types = new ConcurrentHashMap<>();
 

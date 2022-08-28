@@ -1,13 +1,11 @@
 package ru.job4j.accident.repository;
 
-import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Rule;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Repository
 public class RuleMem {
     private final Map<Integer, Rule> rules = new ConcurrentHashMap<>();
 

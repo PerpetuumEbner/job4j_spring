@@ -2,19 +2,19 @@ package ru.job4j.accident.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.User;
-import ru.job4j.accident.repository.UserMem;
+import ru.job4j.accident.repository.UserJdbcTemplate;
 
 import java.util.Collection;
 
 @Service
 public class UserService {
-    private final UserMem userMem;
+    private final UserJdbcTemplate userJdbcTemplate;
 
-    public UserService(UserMem userMem) {
-        this.userMem = userMem;
+    public UserService(UserJdbcTemplate userJdbcTemplate) {
+        this.userJdbcTemplate = userJdbcTemplate;
     }
 
     public Collection<User> findAll() {
-        return userMem.findAll();
+        return userJdbcTemplate.findAll();
     }
 }
