@@ -16,8 +16,7 @@ public class AccidentTypeJdbcTemplate {
     }
 
     public AccidentType findById(int id) {
-        return jdbc.query("SELECT * FROM types WHERE id = ?", new Object[]{id}, new BeanPropertyRowMapper<>(AccidentType.class))
-                .stream().findAny().orElse(null);
+        return jdbc.queryForObject("SELECT * FROM types WHERE id = ?", new BeanPropertyRowMapper<>(AccidentType.class), id);
     }
 
     public Collection<AccidentType> findAll() {
