@@ -2,23 +2,37 @@ package ru.job4j.accident.repository;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.Rule;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Set;
 
 @Repository
-public class AccidentJdbcTemplate implements RowMapper<Accident> {
+public class AccidentJdbcTemplate {
     private final JdbcTemplate jdbc;
 
     private final AccidentTypeJdbcTemplate type;
+
+    private static final String INSERT_INTO_ACCIDENTS = "INSERT INTO accidents (name, text, address, type_id)"
+            + " VALUES (?, ?, ?, ?)";
+
+    private final String INSERT_INTO_ACCIDENTS_RULES = "INSERT INTO accidents_rules (accident_id, rule_id)"
+            + " VALUES (?, ?)";
+
+    private static final String UPDATE_ACCIDENTS = "UPDATE accidents SET name = ?, text = ?, address = ?, type_id = ?"
+            + " WHERE id = ?";
+
+    private static final String DELETE_ACCIDENTS_RULES = "DELETE FROM accidents_rules WHERE accident_id = ?";
+
+    private static final String SELECT_ACCIDENTS_ID = "SELECT * FROM accidents WHERE id = ?";
+
+    private static final String SELECT_RULES_JOIN_ACCIDENTS_RULES = "SELECT * FROM rules JOIN accidents_rules ON"
+            + " rules.id = rule_id and accident_id = ?";
+
+    private static final String SELECT_ACCIDENTS_ALL = "SELECT * FROM accidents";
 
     public AccidentJdbcTemplate(JdbcTemplate jdbc, AccidentTypeJdbcTemplate type) {
         this.jdbc = jdbc;
@@ -28,8 +42,7 @@ public class AccidentJdbcTemplate implements RowMapper<Accident> {
     public void create(Accident accident) {
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         jdbc.update(con -> {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO accidents (name, text, address, type_id) "
-                    + "VALUES (?, ?, ?, ?)", new String[]{"id"});
+            PreparedStatement ps = con.prepareStatement(INSERT_INTO_ACCIDENTS, new String[]{"id"});
             ps.setString(1, accident.getName());
             ps.setString(2, accident.getText());
             ps.setString(3, accident.getAddress());
@@ -37,47 +50,32 @@ public class AccidentJdbcTemplate implements RowMapper<Accident> {
             return ps;
         }, keyHolder);
         for (Rule rule : accident.getRules()) {
-            jdbc.update("insert into accidents_rules (accident_id, rule_id) values (?, ?)",
-                    keyHolder.getKey(), rule.getId());
+            jdbc.update(INSERT_INTO_ACCIDENTS_RULES, keyHolder.getKey(), rule.getId());
         }
     }
 
     public void update(Accident accident) {
-        jdbc.update("UPDATE accidents SET name = ?, text = ?, address = ?, type_id = ? WHERE id = ?",
+        jdbc.update(UPDATE_ACCIDENTS,
                 accident.getName(),
                 accident.getText(),
                 accident.getAddress(),
                 accident.getType().getId(),
                 accident.getId());
-        jdbc.update("DELETE FROM accidents_rules WHERE accident_id = ?", accident.getId());
+        jdbc.update(DELETE_ACCIDENTS_RULES, accident.getId());
         for (Rule rule : accident.getRules()) {
-            jdbc.update("insert into accidents_rules (accident_id, rule_id) values (?, ?)",
-                    accident.getId(), rule.getId());
+            jdbc.update(INSERT_INTO_ACCIDENTS_RULES, accident.getId(), rule.getId());
         }
     }
 
     public Accident findById(int id) {
-        return jdbc.queryForObject("SELECT * FROM accidents WHERE id = ?", this, id);
+        return jdbc.queryForObject(SELECT_ACCIDENTS_ID, new AccidentMapper(type, this), id);
     }
 
     public List<Rule> findRulesByAccidentId(int id) {
-        return jdbc.query("SELECT * FROM rules JOIN accidents_rules ON rules.id = rule_id and accident_id = ?",
-                new BeanPropertyRowMapper<>(Rule.class), id);
+        return jdbc.query(SELECT_RULES_JOIN_ACCIDENTS_RULES, new BeanPropertyRowMapper<>(Rule.class), id);
     }
 
     public List<Accident> findAll() {
-        return jdbc.query("SELECT * FROM accidents", this);
-    }
-
-    @Override
-    public Accident mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Accident accident = new Accident();
-        accident.setId(rs.getInt("id"));
-        accident.setName(rs.getString("name"));
-        accident.setText(rs.getString("text"));
-        accident.setAddress(rs.getString("address"));
-        accident.setType(type.findById(rs.getInt("type_id")));
-        accident.setRules(Set.copyOf(findRulesByAccidentId(accident.getId())));
-        return accident;
+        return jdbc.query(SELECT_ACCIDENTS_ALL, new AccidentMapper(type, this));
     }
 }
