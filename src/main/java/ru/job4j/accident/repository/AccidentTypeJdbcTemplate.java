@@ -9,13 +9,13 @@ import java.util.Collection;
 
 @Repository
 public class AccidentTypeJdbcTemplate {
-    private final JdbcTemplate jdbc;
+    private static JdbcTemplate jdbc = null;
 
     public AccidentTypeJdbcTemplate(JdbcTemplate jdbc) {
-        this.jdbc = jdbc;
+        AccidentTypeJdbcTemplate.jdbc = jdbc;
     }
 
-    public AccidentType findById(int id) {
+    public static AccidentType findById(int id) {
         return jdbc.queryForObject("SELECT * FROM types WHERE id = ?", new BeanPropertyRowMapper<>(AccidentType.class), id);
     }
 

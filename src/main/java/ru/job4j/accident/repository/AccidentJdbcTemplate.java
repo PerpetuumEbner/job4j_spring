@@ -12,9 +12,7 @@ import java.util.List;
 
 @Repository
 public class AccidentJdbcTemplate {
-    private final JdbcTemplate jdbc;
-
-    private final AccidentTypeJdbcTemplate type;
+    private static JdbcTemplate jdbc;
 
     private static final String INSERT_INTO_ACCIDENTS = "INSERT INTO accidents (name, text, address, type_id)"
             + " VALUES (?, ?, ?, ?)";
@@ -32,11 +30,12 @@ public class AccidentJdbcTemplate {
     private static final String SELECT_RULES_JOIN_ACCIDENTS_RULES = "SELECT * FROM rules JOIN accidents_rules ON"
             + " rules.id = rule_id and accident_id = ?";
 
-    private static final String SELECT_ACCIDENTS_ALL = "SELECT * FROM accidents";
+    private static final String SELECT_ACCIDENTS_ALL =
+            "SELECT a.id as id, a.name as name, a.text as text, a.address as address, t.id as type_id"
+                    + " from accidents a INNER JOIN types t on a.type_id = t.id;";
 
-    public AccidentJdbcTemplate(JdbcTemplate jdbc, AccidentTypeJdbcTemplate type) {
-        this.jdbc = jdbc;
-        this.type = type;
+    public AccidentJdbcTemplate(JdbcTemplate jdbc) {
+        AccidentJdbcTemplate.jdbc = jdbc;
     }
 
     public void create(Accident accident) {
@@ -68,14 +67,14 @@ public class AccidentJdbcTemplate {
     }
 
     public Accident findById(int id) {
-        return jdbc.queryForObject(SELECT_ACCIDENTS_ID, new AccidentMapper(type, this), id);
+        return jdbc.queryForObject(SELECT_ACCIDENTS_ID, new AccidentMapper(), id);
     }
 
-    public List<Rule> findRulesByAccidentId(int id) {
+    public static List<Rule> findRulesByAccidentId(int id) {
         return jdbc.query(SELECT_RULES_JOIN_ACCIDENTS_RULES, new BeanPropertyRowMapper<>(Rule.class), id);
     }
 
     public List<Accident> findAll() {
-        return jdbc.query(SELECT_ACCIDENTS_ALL, new AccidentMapper(type, this));
+        return jdbc.query(SELECT_ACCIDENTS_ALL, new AccidentMapper());
     }
 }
