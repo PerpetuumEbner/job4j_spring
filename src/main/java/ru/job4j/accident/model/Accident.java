@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -16,6 +14,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table(name = "accidents")
 public class Accident {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +27,18 @@ public class Accident {
 
     private String address;
 
+    @ManyToOne
+    @JoinColumn(name = "type_id")
     private AccidentType type;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "accidents_rules",
+            joinColumns = {
+                    @JoinColumn(name = "accident_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "rule_id")
+            })
     private Set<Rule> rules = new HashSet<>();
 
     public void addRule(Rule rule) {
