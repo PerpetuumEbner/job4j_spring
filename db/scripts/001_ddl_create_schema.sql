@@ -27,7 +27,7 @@ CREATE TABLE accidents
 
 
 
-CREATE TABLE IF NOT EXISTS accidents_types
+CREATE TABLE IF NOT EXISTS accidents_rules
 (
     accident_id INT NOT NULL REFERENCES accidents (id),
     rule_id     INT NOT NULL REFERENCES rules (id)

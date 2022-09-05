@@ -20,6 +20,6 @@ public class RuleHibernate implements Wrapper {
     }
 
     public Collection<Rule> findAll() {
-        return this.tx(session -> session.createQuery("from Accident").list(), sf);
+        return this.tx(session -> session.createQuery("from Rule").list(), sf);
     }
 }
