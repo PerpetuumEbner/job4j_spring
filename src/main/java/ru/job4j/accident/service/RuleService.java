@@ -2,23 +2,23 @@ package ru.job4j.accident.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.RuleHibernate;
+import ru.job4j.accident.repository.RuleRepository;
 
 import java.util.Collection;
 
 @Service
 public class RuleService {
-    private final RuleHibernate ruleHibernate;
+    private final RuleRepository ruleRepository;
 
-    public RuleService(RuleHibernate ruleHibernate) {
-        this.ruleHibernate = ruleHibernate;
+    public RuleService(RuleRepository ruleRepository) {
+        this.ruleRepository = ruleRepository;
     }
 
     public Rule findById(int id) {
-        return ruleHibernate.findById(id);
+        return ruleRepository.findById(id).orElse(null);
     }
 
     public Collection<Rule> findAll() {
-        return ruleHibernate.findAll();
+        return ruleRepository.findAll();
     }
 }

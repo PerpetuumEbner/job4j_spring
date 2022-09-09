@@ -2,20 +2,19 @@ package ru.job4j.accident.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.User;
-import ru.job4j.accident.repository.UserHibernate;
-import ru.job4j.accident.repository.UserJdbcTemplate;
+import ru.job4j.accident.repository.UserRepository;
 
 import java.util.Collection;
 
 @Service
 public class UserService {
-    private final UserHibernate userHibernate;
+    private final UserRepository userRepository;
 
-    public UserService(UserHibernate userHibernate) {
-        this.userHibernate = userHibernate;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public Collection<User> findAll() {
-        return userHibernate.findAll();
+        return userRepository.findAll();
     }
 }
