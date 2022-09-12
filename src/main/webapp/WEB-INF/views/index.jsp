@@ -13,35 +13,44 @@
     <title>Accident - правонарушения</title>
 </head>
 <body>
-<div class="container pt-3">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Нарушение</th>
-            <th scope="col">Описание</th>
-            <th scope="col">Тип транспорта</th>
-            <th scope="col">Статья</th>
-            <th scope="col">Адрес</th>
-        </tr>
-        </thead>
-        <c:forEach var="accident" items="${accidents}">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <a class="nav-item nav-link">
+            <div>
+                Login as : ${user.username}
+            </div>
+        </a>
+    </nav>
+    <div class="container pt-3">
+        <table class="table table-hover">
+            <thead>
             <tr>
-                <td>${accident.id}</td>
-                <td>
-                    <a href="<c:url value='/edit?id=${accident.id}'/>" class="global">${accident.name}</a>
-                </td>
-                <td>${accident.text}</td>
-                <td>${accident.type.name}</td>
-                <td>
-                    <c:forEach var="type" items="${accident.getRules()}">
-                        <option>${type.name}</option>
-                    </c:forEach></td>
-                <td>${accident.address}</td>
+                <th scope="col">Id</th>
+                <th scope="col">Нарушение</th>
+                <th scope="col">Описание</th>
+                <th scope="col">Тип транспорта</th>
+                <th scope="col">Статья</th>
+                <th scope="col">Адрес</th>
             </tr>
-        </c:forEach>
-    </table>
-    <a class="btn btn-outline-primary" href="<c:url value='/create'/>" role="button">Добавить</a>
+            </thead>
+            <c:forEach var="accident" items="${accidents}">
+                <tr>
+                    <td>${accident.id}</td>
+                    <td>
+                        <a href="<c:url value='/edit?id=${accident.id}'/>" class="global">${accident.name}</a>
+                    </td>
+                    <td>${accident.text}</td>
+                    <td>${accident.type.name}</td>
+                    <td>
+                        <c:forEach var="type" items="${accident.getRules()}">
+                            <option>${type.name}</option>
+                        </c:forEach></td>
+                    <td>${accident.address}</td>
+                </tr>
+            </c:forEach>
+        </table>
+        <a class="btn btn-outline-primary" href="<c:url value='/create'/>" role="button">Добавить</a>
+    </div>
 </div>
 </body>
 </html>

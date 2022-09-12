@@ -10,14 +10,6 @@ CREATE TABLE rules
     name TEXT
 );
 
-CREATE TABLE users
-(
-    id       SERIAL PRIMARY KEY,
-    name     TEXT,
-    password TEXT
-
-);
-
 CREATE TABLE accidents
 (
     id      SERIAL PRIMARY KEY,
@@ -26,8 +18,6 @@ CREATE TABLE accidents
     address TEXT,
     type_id INT NOT NULL REFERENCES types (id)
 );
-
-
 
 CREATE TABLE IF NOT EXISTS accidents_rules
 (

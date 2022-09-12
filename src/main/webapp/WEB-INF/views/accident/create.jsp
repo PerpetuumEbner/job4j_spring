@@ -13,46 +13,55 @@
     <title>Accident - правонарушения</title>
 </head>
 <body>
-<div class="container-md pt-3">
-    <div class="card">
-        <div class="card-header">
-            Добавить правонарушение
-        </div>
-        <div class="card-body">
-            <form action="<c:url value='/save'/>" method='POST'>
-                <div class="form-group">
-                    <label for="name">Название</label>
-                    <input type="text" class="form-control" name="name" id="name">
-                </div>
-                <div class="form-group pt-3">
-                    <label for="text">Описание</label>
-                    <textarea class="form-control" name="text" id="text"></textarea>
-                </div>
-                <div class="form-group pt-3">
-                    <label for="typeId">Тип транспорта</label>
-                    <select class="form-select" id="typeId" name="typeId">
-                        <option selected>Выберите тип</option>
-                        <c:forEach var="type" items="${types}">
-                            <option value="${type.id}">${type.name}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="rulesId">Статья</label>
-                    <select class="form-control" id="rulesId" name="rulesId" multiple="multiple" size="3">
-                        <c:forEach var="rule" items="${rules}">
-                            <option value="${rule.id}">${rule.name}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div class="form-group pt-3">
-                    <label for="address">Адрес</label>
-                    <input type="text" class="form-control" name="address" id="address">
-                </div>
-                <div class="form-group pt-3">
-                    <button type="submit" class="btn btn-outline-primary ">Создать</button>
-                </div>
-            </form>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <a class="nav-item nav-link">
+            <div>
+                Login as : ${user.username}
+            </div>
+        </a>
+    </nav>
+    <div class="container-md pt-3">
+        <div class="card">
+            <div class="card-header">
+                Добавить правонарушение
+            </div>
+            <div class="card-body">
+                <form action="<c:url value='/save'/>" method='POST'>
+                    <div class="form-group">
+                        <label for="name">Название</label>
+                        <input type="text" class="form-control" name="name" id="name">
+                    </div>
+                    <div class="form-group pt-3">
+                        <label for="text">Описание</label>
+                        <textarea class="form-control" name="text" id="text"></textarea>
+                    </div>
+                    <div class="form-group pt-3">
+                        <label for="typeId">Тип транспорта</label>
+                        <select class="form-select" id="typeId" name="typeId">
+                            <option selected>Выберите тип</option>
+                            <c:forEach var="type" items="${types}">
+                                <option value="${type.id}">${type.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rulesId">Статья</label>
+                        <select class="form-control" id="rulesId" name="rulesId" multiple="multiple" size="3">
+                            <c:forEach var="rule" items="${rules}">
+                                <option value="${rule.id}">${rule.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="form-group pt-3">
+                        <label for="address">Адрес</label>
+                        <input type="text" class="form-control" name="address" id="address">
+                    </div>
+                    <div class="form-group pt-3">
+                        <button type="submit" class="btn btn-outline-primary ">Создать</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
