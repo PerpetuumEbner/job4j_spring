@@ -12,8 +12,10 @@ CREATE TABLE rules
 
 CREATE TABLE users
 (
-    id   SERIAL PRIMARY KEY,
-    name TEXT
+    id       SERIAL PRIMARY KEY,
+    name     TEXT,
+    password TEXT
+
 );
 
 CREATE TABLE accidents
