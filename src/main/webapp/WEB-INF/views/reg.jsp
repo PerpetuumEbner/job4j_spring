@@ -45,15 +45,10 @@
     <div class="mx-auto my-3" style="width: 900px;">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Авторизация
+                Регистрация
             </div>
             <div class="card-body">
-                <c:if test="${not empty errorMessage}">
-                    <div style="color:red; font-weight: bold; margin: 30px 0px;">
-                            ${errorMessage}
-                    </div>
-                </c:if>
-                <form name='login' action="<c:url value='/login'/>" method='POST'>
+                <form name='login' action="<c:url value='/reg'/>" method='POST'>
                     <div class="form-group pb-3">
                         <label for="username">Имя</label>
                         <input type="text" class="form-control" name="username" id="username">
@@ -62,8 +57,7 @@
                         <label for="password">Пароль</label>
                         <input type="password" class="form-control" name="password" id="password">
                     </div>
-                    <button type="submit" class="btn btn-outline-primary">Войти</button>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <button type="submit" class="btn btn-outline-primary">Создать</button>
                 </form>
             </div>
         </div>
