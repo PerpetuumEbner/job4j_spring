@@ -51,7 +51,7 @@
             </div>
             <div class="card-body">
                 <c:if test="${not empty errorMessage}">
-                    <div style="color:red; font-weight: bold; margin: 30px 0px;">
+                    <div class="alert alert-danger" role="alert">
                             ${errorMessage}
                     </div>
                 </c:if>
