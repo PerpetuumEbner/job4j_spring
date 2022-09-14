@@ -1,5 +1,6 @@
 package ru.job4j.accident.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,7 @@ public class AccidentControl {
     public String create(Model model) {
         model.addAttribute("types", types.findAll());
         model.addAttribute("rules", rules.findAll());
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "accident/create";
     }
 
@@ -50,6 +52,7 @@ public class AccidentControl {
         model.addAttribute("types", types.findAll());
         model.addAttribute("rules", rules.findAll());
         model.addAttribute("accident", accidents.findById(id));
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "accident/edit";
     }
 

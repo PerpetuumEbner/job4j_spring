@@ -31,10 +31,12 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <div class="pr-3">
-                    <a href="<c:url value='/reg'/>">Регистрация</a>
-                </div>
-                <div>
-                    <a href="<c:url value='/logout'/>">Выйти</a>
+                    <c:if test="${user.username == null}">
+                        <a href="<c:url value='/reg'/>">Регистрация</a>
+                    </c:if>
+                    <c:if test="${user.username != null}">
+                        <a href="<c:url value='/logout'/>">Выйти</a>
+                    </c:if>
                 </div>
             </div>
         </div>
