@@ -27,10 +27,10 @@ public class RegControl {
 
     @PostMapping("/reg")
     public String regSave(@ModelAttribute User user) {
-        if (user.getUsername().equals("") || user.getPassword().equals("")) {
+        if (("").equals(user.getUsername()) || ("").equals(user.getPassword())) {
             return "redirect:/reg?empty=true";
         }
-        if (users.findByUsername(user.getUsername()) == null) {
+        if (users.findByUsername(user.getUsername()).isEmpty()) {
             user.setEnabled(true);
             user.setPassword(encoder.encode(user.getPassword()));
             user.setAuthority(authorities.findByAuthority("ROLE_USER"));
@@ -39,11 +39,12 @@ public class RegControl {
         } else {
             return "redirect:/reg?exists=true";
         }
-
     }
 
     @GetMapping("/reg")
-    public String regPage(Model model, @RequestParam(value = "exists", required = false) String exists, @RequestParam(value = "empty", required = false) String empty) {
+    public String regPage(Model model,
+                          @RequestParam(value = "exists", required = false) String exists,
+                          @RequestParam(value = "empty", required = false) String empty) {
         String errorMessage = null;
         if (exists != null) {
             errorMessage = "User with the same name already exists!!";

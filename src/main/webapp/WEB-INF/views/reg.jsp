@@ -32,6 +32,7 @@
             <div class="navbar-nav">
                 <div class="pr-3">
                     <c:if test="${user.username == null}">
+                        <a href="<c:url value='/login'/>">Войти</a>
                         <a href="<c:url value='/reg'/>">Регистрация</a>
                     </c:if>
                     <c:if test="${user.username != null}">
